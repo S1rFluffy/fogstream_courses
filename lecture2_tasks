@@ -46,3 +46,17 @@ else:
     result = words.find("f") + words.rfind("f")
 
 print (my_count, " /// ",result)
+
+#4
+'''
+Дана строка words. Замените в этой строке все цифры 1 на слово one. Ответ в переменную result.
+'''
+
+
+
+if words.find("1") == -1:
+    result = words
+else:
+    result = words.replace('1','one')
+
+print (" /// ",result)
