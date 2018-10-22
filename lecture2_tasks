@@ -1,0 +1,48 @@
+words = '1234 67890ab cde'
+print (words)
+
+#1
+# words - хранит в себе строку с словами
+result = len(words.split())
+
+
+#2
+'''Дана строка words. Разрежьте ее на две равные
+части (если длина строки — четная, а если длина строки нечетная,
+    то длина первой части должна быть на один символ больше).
+Переставьте эти две части местами, результат запишите в новую строку
+result и выведите на экран.'''
+print (len(words.split()))
+print (len(words))
+lent_word = int(len(words)/2)
+if len(words)%2 == 1:
+    lent_word += 1
+begin_w = words[:lent_word]
+end_w = words[lent_word:]
+print (end_w + begin_w)
+
+#3
+'''
+Дана строка words. Если в этой строке буква f встречается только один раз,
+то в переменную result её индекс. Если она встречается два и более раз,
+то сумму индексов её первого и последнего появления в переменную result.
+Если буква f в данной строке не встречается, вывести -1 в result.
+'''
+
+
+my_count = 0
+for a in words:
+    if a == 'f':
+        my_count += 1
+
+
+
+if words.find("f") == words.rfind("f"):
+    if words.find("f") == -1:
+        result = -1
+    else:
+        result = words.index('f')
+else:
+    result = words.find("f") + words.rfind("f")
+
+print (my_count, " /// ",result)
