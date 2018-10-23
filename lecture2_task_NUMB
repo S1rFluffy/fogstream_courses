@@ -46,3 +46,17 @@ print(result)
 print("numbers = |", numbers, '|\n\n')
 result = max(numbers) + numbers.index(max(numbers))
 print(result)
+
+
+#11
+'''
+Дан список чисел numbers. Найти все уникальные элементы в списке.
+Список произвольной длины и может состоять как из чисел, так и строк.
+Результат положите в список result
+'''
+print("numbers = |", numbers, '|\n\n')
+my_set = set(numbers)
+result = []
+for x in my_set:
+    result.append(x)
+print(result)
