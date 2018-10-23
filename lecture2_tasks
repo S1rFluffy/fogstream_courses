@@ -73,3 +73,24 @@ for i, w in enumerate(words):
     else:
         continue
 print(result)
+
+#6
+'''
+Вам задана строка words, состоящая из пробелов и латинских букв.
+Строка называется панграммой, если она содержит каждую из 26 латинских
+букв хотя бы раз. Определите является ли строка панграммой. В единственной
+строке входных данных записана строка. Строка может содержать только пробелы,
+заглавные и строчные буквы латинского алфавита. Заглавные и строчные буквы
+считаются одинаковыми. Ответ в переменную result True или False
+'''
+words = 'abcdefgaaahijklmnopqrstuvwxyz'
+# words - хранит в себе строку с словами
+print("words = |", words, '|\n\n')
+for_my_check = set(words.lower())
+if " " in for_my_check and len(for_my_check) == 27:
+    result = True
+elif not " " in for_my_check and len(for_my_check) == 26:
+    result = True
+else:
+    result = False
+print(result)
