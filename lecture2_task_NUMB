@@ -24,11 +24,25 @@ print(result)
 Если таких пар соседей несколько — найдите первую пару. Результат сумма пары
 положите в переменную result
 '''
-numbers = [10, 10, 5, 2, 9, 0, -8, 1, 8, -8]
+numbers = [10, 11, 5, 2, 9, 0, -8, 1, 8, -8]
 print("numbers = |", numbers, '|\n\n')
 result = 0
 for x in range(1,len(numbers)):
     if (numbers[x] >= 0 and numbers[x-1] >= 0) or (numbers[x] < 0 and numbers[x-1] < 0):
         result = numbers[x] + numbers[x-1]
         break
+print(result)
+
+
+
+#10
+'''
+Дан список чисел numbers. Найдите значение наибольшего элемента в списке,
+а затем индекс этого элемента в списке. Если наибольших элементов несколько,
+выведите индекс первого из них. Результат сумма индекса и элемента положите
+в переменную result
+'''
+
+print("numbers = |", numbers, '|\n\n')
+result = max(numbers) + numbers.index(max(numbers))
 print(result)
