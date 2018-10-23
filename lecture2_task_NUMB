@@ -1,0 +1,17 @@
+numbers = [60, 996, 897, 172, 639, 551, 95, 398, 329, 567, 800, 60]
+
+print (numbers)
+print (len(numbers))
+
+#8
+'''
+Дан список чисел numbers. Найдите все элементы списка,
+которые больше предыдущего элемента. Результат положите в cписок result
+'''
+
+print("numbers = |", numbers, '|\n\n')
+result = []
+for x in range(1,len(numbers)):
+    if numbers[x]>numbers[x-1]:
+        result.append(numbers[x])
+print(result)
