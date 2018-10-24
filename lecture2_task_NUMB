@@ -80,3 +80,44 @@ else:
             result = numbers.index(i)
             break
 print (result)
+
+
+
+
+#13
+'''
+Даны имена и средняя успеваемость учеников класса. Список students состоящий из словарей
+
+{
+    'name': "Андрей Сидоров",
+    'grade': 4.5,
+}
+Необходимо вывести имена одного или нескольких учеников, находящихся на предпоследнем
+месте по успеваемости. Результат положите в список result
+макс логика:
+
+вытащить все значения,  найти минимум - удалить его из этого списка, проверить, не осталось ли
+этого минимального значения еще раз.
+
+после еще раз найти минимум. Для всех значений студентов где грэйд равно этому минимуму,
++=резалт
+
+'''
+result = []
+print("|", students, '|\n')
+grade_list = []
+for man in students:
+    grade_list.append((man.get('grade')))
+min_min = min(grade_list)
+print(grade_list)
+
+while min_min == min(grade_list):
+    print(min_min, 'удаление минимальных оценок')
+    grade_list.remove(min_min)
+
+before_min = min(grade_list)
+print(grade_list, 'предпоследняя успеваемость:', before_min)
+for man in students:
+    if man.get('grade') == before_min:
+        result.append(man.get('name'))
+print (result)
