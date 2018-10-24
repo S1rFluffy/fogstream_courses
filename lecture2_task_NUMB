@@ -60,3 +60,23 @@ result = []
 for x in my_set:
     result.append(x)
 print(result)
+
+
+#12
+'''
+Дан numbers возврастающий список (все элементы списка упорядочены по возрастанию)
+натуральных чисел. После этого вводится число number. Все числа во входных данных
+натуральные и не превышают 200. Найдите индекс, где окажется число number. Если
+в списке есть элемент с таким значением, то число number помещается после него.
+Результат положите в переменную result
+'''
+print("numbers = |", numbers, '|\n\nnumber:', number)
+
+if numbers.count(number) != 0:
+    result = numbers.index(number) + 1
+else:
+    for i in numbers:
+        if number < i:
+            result = numbers.index(i)
+            break
+print (result)
