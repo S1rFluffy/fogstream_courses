@@ -55,10 +55,13 @@ print(result)
 Результат положите в список result
 '''
 print("numbers = |", numbers, '|\n\n')
-my_set = set(numbers)
-result = []
-for x in my_set:
-    result.append(x)
+# my_set = set(numbers)
+# result = []
+# for x in my_set:
+#     result.append(x)
+# print(result)
+
+result = list(set(numbers))
 print(result)
 
 
@@ -120,4 +123,15 @@ print(grade_list, 'предпоследняя успеваемость:', before
 for man in students:
     if man.get('grade') == before_min:
         result.append(man.get('name'))
+print (result)
+
+#14
+'''
+Даны два списка list_one и list_two произвольной длины каждый. Списки могут
+содержать как числа, так и строки. Необходимо вывести только те элементы,
+которые входят как первый список, так и во второй. Результат положите в список result
+
+'''
+print("|", list_one, '|\n\n', list_two, '|\n', )
+result = list(set(list_one) & set(list_two))
 print (result)
