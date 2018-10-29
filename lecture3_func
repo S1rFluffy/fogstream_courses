@@ -16,3 +16,23 @@ def area(x1, x2, y1, y2):
     a = abs(y1 - y2)
     b = abs(x1 - x2)
     return (a * b) / 2
+print( area(1,3,1,3))
+
+
+
+#3
+def stronger(scores):
+''' Дан список результатов попыток одного спортсмена для некоторого соревнования.
+Написать функцию stronger(scores), которая считает сколько раз за сессию спортсмен
+показал результат лучше, чем в прошлую попытку, то есть текущее значение превышает предыдущее.
+# scores хранит список результатов
+# не удаляйте функцию stronger, напишите свою реализацию
+'''
+    sport_count=0
+    for i in range (1,len(scores)):
+        if scores[i]>scores[i-1]:
+            sport_count +=1
+    return sport_count
+    
+scores = [10, 5, 20, 20, 4, 5, 2, 25, 1]
+print (stronger(scores))
