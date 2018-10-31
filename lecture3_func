@@ -58,3 +58,21 @@ def stronger(scores):
     
 scores = [10, 5, 20, 20, 4, 5, 2, 25, 1]
 print (stronger(scores))
+
+
+# x хранит число
+# не удаляйте функцию avaranger, напишите свою реализацию
+# >>> avaranger(10) # Среднее арифметическое 10
+# >>> 10
+# >>> avaranger(11) # Среднее арифметическое 10 и 11
+# >>> 10.5
+# >>> avaranger(12) # Среднее арифметическое 10, 11 и 12
+# >>> 11
+def avaranger(x):
+# Написать функцию avaranger(x), которая принимает 1 аргумент -
+# любое число и возвращается среднее арифметическое значение,
+# на основании текущего числа и предыдущих, которые были введены ранее.
+    if not hasattr(avaranger, "my_avenge"):
+        avaranger.my_avenge = []
+    avaranger.my_avenge.append(x)
+    return sum(avaranger.my_avenge)/len(avaranger.my_avenge)
