@@ -1,0 +1,145 @@
+# 1
+# Создать класс Fraction, который должен иметь два поля:
+#     числитель a и знаменатель b. Оба поля должны быть типа int.
+#     Конструктор класса должен принимать параметры a и b и присваивать их полям.
+#     Реализовать сравнение, сложение, вычитание и умножение дробей. Операции с дробями
+#     должны выполняться как с обычными числами, то есть если frac1 и frac2 - объекты класса Fraction,
+#     то сложение выполняестся так:
+# frac1 + frac2
+# А сравнение так:
+# frac1 == frac2
+# frac1 > frac2
+# frac1 <= frac2
+
+class Fraction():
+    """класс для дробей a/b"""
+
+    def __init__(self, a, b):
+        #super(Fraction, self).__init__()
+        self.a = int(a)
+        self.b = int(b)
+        # print('>появилась дробь=>', self.a, '/', self.b)
+        z = 2
+        while z <= min([abs(a), abs(b)]):
+            if self.a % z == 0 and self.b % z == 0:
+                self.a, self.b = int(self.a / z), int(self.b / z)
+                # print('привели дробь на ', z, self.a, '/', self.b)
+                z = 1
+            z += 1
+
+    def __add__(self, other):
+        '''сложение дробей'''
+        return Fraction((other.a * self.b + other.b * self.a), (other.b * self.b))
+
+    def __sub__(self, other):
+        '''вычитание дробей'''
+        return Fraction((other.b * self.a - other.a * self.b), (other.b * self.b))
+
+    def __mul__(self, other):
+        '''умножение дробей'''
+        return Fraction((self.a * other.a), (other.b * self.b))
+
+    def __truediv__(self, other):
+        '''деление дробей'''
+        return Fraction((self.a * other.b), (other.a * self.b))
+
+    def __eq__(self, other):
+        '''  x == y вызывает x.__eq__(y) '''
+        return (self.a * other.b) == (other.a * self.b)
+
+    def __lt__(self, other):
+        ''' - x < y вызывает x.__lt__(y).'''
+        return (self.a * other.b) < (other.a * self.b)
+
+    def __le__(self, other):
+        ''' - x ≤ y вызывает x.__le__(y).'''
+        return (self.a * other.b) <= (other.a * self.b)
+
+    def __ne__(self, other):
+        ''' - x != y вызывает x.__ne__(y)'''
+        return (self.a * other.b) != (other.a * self.b)
+
+    def __gt__(self, other):
+        ''' - x > y вызывает x.__gt__(y).'''
+        return (self.a * other.b) > (other.a * self.b)
+
+    def __ge__(self, other):
+        ''' - x ≥ y вызывает x.__ge__(y).'''
+        return (self.a * other.b) >= (other.a * self.b)
+
+
+n1 = Fraction(11, 11)
+n2 = Fraction(1, 3)
+
+nn = n1 + n2
+print(nn.a, nn.b)
+print('n1', n1.a, n1.b)
+
+
+
+# 2
+# Создать класс Polynome, представляющий собой многочлен одной переменной. Конструктор класса должен
+# принимать один параметр - список коэффициентов многочлена от младшего члена к старшему. Реализовать
+# сложение, вычитание и умножение многочленов, а также метод calc(x), вычисляющий значение многочлена для
+# заданной переменной x. Операции с многочленами должны выполняться как с обычными числами, то есть если
+# poly1 и poly2 - объекты класса Polynome, то сложение выполняестся так: poly1 + poly2
+# Обратите внимание на порядок коэффициентов в списке: от младшего члена к старшему. В математике принятая
+# форма записи многочленов - от старшего члена к младшему: 4x2−2x+1. Такой многочлен инициализируется
+# вот таким списком коэффициентов: [1, -2, 4]
+
+class Polynome():
+
+    def __init__(self, poly_lst):
+        self.poly_lst = poly_lst
+        print("новый полином", poly_lst)
+
+    def __add__(self, other):
+        if len(self.poly_lst) < len(other.poly_lst):
+            min_len = len(self.poly_lst)
+            poly_lst_add = other.poly_lst[min_len:]
+        else:
+            min_len = len(other.poly_lst)
+            poly_lst_add = self.poly_lst[min_len:]
+        new_lst = [self.poly_lst[i] + other.poly_lst[i]
+                   for i in range(min_len)] + poly_lst_add
+        return Polynome(new_lst)
+
+    def __sub__(self, other):
+        if len(self.poly_lst) < len(other.poly_lst):
+            min_len = len(self.poly_lst)
+            poly_lst_add = [i * (-1) for i in other.poly_lst[min_len:] ]
+        else:
+            min_len = len(other.poly_lst)
+            poly_lst_add = self.poly_lst[min_len:]
+        new_lst = [self.poly_lst[i] - other.poly_lst[i]
+                   for i in range(min_len)] + poly_lst_add
+        return Polynome(new_lst)
+
+    def __mul__(self, other):
+        new_lst = [0] * (len(self.poly_lst) + len(other.poly_lst))
+        for i in range(len(self.poly_lst)):
+            for j in range(len(other.poly_lst)):
+                new_lst[i + j] += self.poly_lst[i] * other.poly_lst[j]
+        return Polynome(new_lst)
+
+    def calc(self, x):
+        res_calc = 0
+        for i, j in enumerate(self.poly_lst):
+            res_calc += j * (x**i)
+        return res_calc
+
+
+# Разность: 362771, должно быть: -361901
+# Коэффициенты многочленов: [5, -15], [12, 19, 12, 5, 13], Переменная: -13
+
+poly1 = Polynome([5, -15])
+poly2 = Polynome([12, 19, 12, 5, 13])
+
+print('polynome 1', poly1.poly_lst)
+
+b = poly1 + poly2
+print('polynome +', b.poly_lst)
+
+a = poly1 - poly2
+print('polynome -', a.poly_lst)
+print('calc: ', a.calc(-13))
