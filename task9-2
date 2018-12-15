@@ -1,0 +1,66 @@
+from datetime import datetime
+import urllib.request
+import csv
+import io
+
+headers = {
+    "User-Agent": "Chromium Version 70.0.3538.67, running on LinuxMint 19",
+}
+url_csv = 'https://www.dropbox.com/sh/866wdi7i43na9g6/AADp4o5xR6_KquLStPkR1ToRa/file.csv?dl=1'
+
+data = io.StringIO()
+req = urllib.request.Request(url_csv, headers=headers)
+
+try:
+    with urllib.request.urlopen(req) as response:
+        answer_response = response.read().decode('utf-8')
+except urllib.error.HTTPError as e:
+    print('The server couldn\'t fulfill the request.')
+    print('Error code: ', e.code)
+except urllib.error.URLError as e:
+    print('We failed to reach a server.')
+    print('Reason: ', e.reason)
+else:
+    # everything is fine
+    pass
+
+
+data.write(answer_response)
+file_io = data.getvalue().splitlines()
+data.close()
+
+items_count = len(file_io) - 1
+items_total = 0
+items_actual_count = 0
+items_actual_total = 0
+fieldnames = file_io[0].split(';') 
+csv_reader = csv.DictReader(file_io, delimiter=';', )  # fieldnames=fieldnames) #почему-то работает без них
+for row in csv_reader:
+    items_total += int(row['count'])
+    if (datetime.now() <= datetime.strptime(row['end'], '%d.%m.%Y') and
+            datetime.now() >= datetime.strptime(row['begin'], '%d.%m.%Y')):
+        items_actual_count += 1
+        items_actual_total += int(row['count'])
+result = (items_count, items_total, items_actual_count, items_actual_total,)
+
+
+
+# Получить file.csv, с дропбокса:
+# https://www.dropbox.com/sh/866wdi7i43na9g6/AADp4o5xR6_KquLStPkR1ToRa/file.csv?dl=1
+# и разобрать его содержимое.
+
+# Получить кол-во строк в файле исключая заголовки,
+# Общую сумму  (аггрегация по стобцу count)
+# Количество актуальных строк (begin <= текущая дата <= end)
+# Общая сумма актуальных (аггрегация по стобцу count)
+
+# Ответ вернуть в виде объекта кортежа с содержимым:
+# items_count
+# items_total
+# items_actual_count
+# items_actual_total
+
+# hint:
+# Для чтения ответа, без сохранения файла в файловой системе, нужно преобразовать
+# строку при помощи io.StringIO()
+# (acount: fogstream.course.2018@gmail.com, pass: Qwe123r4)
